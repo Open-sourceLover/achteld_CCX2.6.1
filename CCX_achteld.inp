@@ -1,0 +1,36 @@
+*HEADING
+Cube with prescribed displacement
+**Calculix problem from test example
+**PS:Input deck modified
+***
+*INCLUDE,INPUT=Nall.inp
+*INCLUDE,INPUT=Eall.inp
+*INCLUDE,INPUT=Nbou.inp
+*INCLUDE,INPUT=Npres.inp
+***
+*MATERIAL,NAME=EL
+*ELASTIC
+210000.,.3
+***
+*SOLID SECTION,MATERIAL=EL,ELSET=Eall
+***
+*BOUNDARY
+Nbou1,1,3
+Nbou2,2,3
+Nbou3,3
+***
+*STEP
+*STATIC,SOLVER=SPOOLES
+***
+*BOUNDARY
+**Assigns to degree of freedom 3 of all
+**node(s) belonging to node set Npres the value 1.0
+Npres,3,3,1.0
+***
+*NODE PRINT,NSET=Nall
+U
+*EL PRINT,ELSET=Eall
+S
+***
+*END STEP
+
